@@ -1369,10 +1369,10 @@
                            log.level === 'medium' ? '<span style="color:var(--neon-cyan); margin-right:5px;">[中級]</span>' :
                            '<span style="color:var(--neon-green); margin-right:5px;">[初級]</span>';
           
-          const rankColor = log.rank === 'レジェンド・ホワイトハッカー' ? '#ffd700' :
-                            log.rank === 'ホワイトハッカー' ? 'var(--neon-green)' :
-                            log.rank === 'セキュリティリーダー' ? 'var(--neon-cyan)' :
-                            log.rank === 'セキュリティガード' ? 'var(--neon-yellow)' : 'var(--neon-pink)';
+          const rankColor = log.rank.includes('レジェンド') ? '#ffd700' :
+                            log.rank.includes('ホワイトハッカー') ? 'var(--neon-green)' :
+                            log.rank.includes('セキュリティリーダー') ? 'var(--neon-cyan)' :
+                            log.rank.includes('セキュリティガード') ? 'var(--neon-yellow)' : 'var(--neon-pink)';
 
           item.innerHTML = `
             <div>
@@ -2023,26 +2023,72 @@
       const finalRankEl = document.getElementById('final-rank');
       finalRankEl.className = 'badge-value'; // Reset colors
       
-      if (currentExp >= 1200) {
-        rank = 'レジェンド・ホワイトハッカー';
-        finalRankEl.classList.add('gold');
-        addLog('EVALUATION RANK: [LEGEND WHITE HACKER]. LEGENDARY SECURITY EXPERTISE.', 'success');
-      } else if (currentExp >= 1000) {
-        rank = 'ホワイトハッカー';
-        finalRankEl.classList.add('green');
-        addLog('EVALUATION RANK: [WHITE HACKER]. HIGHLY SECURED PROCESSES.', 'success');
-      } else if (currentExp >= 800) {
-        rank = 'セキュリティリーダー';
-        finalRankEl.classList.add('cyan');
-        addLog('EVALUATION RANK: [SECURITY LEADER]. STRONG SECURITY FOUNDATION.', 'info');
-      } else if (currentExp >= 500) {
-        rank = 'セキュリティガード';
-        finalRankEl.classList.add('yellow');
-        addLog('EVALUATION RANK: [SECURITY GUARD]. MINOR BULWARK ESTABLISHED.', 'info');
-      } else {
-        rank = 'AIビギナー';
-        finalRankEl.classList.add('pink');
-        addLog('EVALUATION RANK: [AI BEGINNER]. CRITICAL SYSTEM WARNING.', 'error');
+      if (selectedLevel === 'easy') {
+        if (currentExp >= 1200) {
+          rank = 'セキュリティリーダー１級';
+          finalRankEl.classList.add('cyan');
+          addLog('EVALUATION RANK: [SECURITY LEADER 1ST CLASS].', 'success');
+        } else if (currentExp >= 1000) {
+          rank = 'セキュリティリーダー２級';
+          finalRankEl.classList.add('cyan');
+          addLog('EVALUATION RANK: [SECURITY LEADER 2ND CLASS].', 'success');
+        } else if (currentExp >= 800) {
+          rank = 'セキュリティリーダー３級';
+          finalRankEl.classList.add('cyan');
+          addLog('EVALUATION RANK: [SECURITY LEADER 3RD CLASS].', 'info');
+        } else if (currentExp >= 500) {
+          rank = 'セキュリティガード';
+          finalRankEl.classList.add('yellow');
+          addLog('EVALUATION RANK: [SECURITY GUARD].', 'info');
+        } else {
+          rank = 'AIビギナー';
+          finalRankEl.classList.add('pink');
+          addLog('EVALUATION RANK: [AI BEGINNER].', 'error');
+        }
+      } else if (selectedLevel === 'medium') {
+        if (currentExp >= 1200) {
+          rank = 'ホワイトハッカー１級';
+          finalRankEl.classList.add('green');
+          addLog('EVALUATION RANK: [WHITE HACKER 1ST CLASS].', 'success');
+        } else if (currentExp >= 1000) {
+          rank = 'ホワイトハッカー２級';
+          finalRankEl.classList.add('green');
+          addLog('EVALUATION RANK: [WHITE HACKER 2ND CLASS].', 'success');
+        } else if (currentExp >= 800) {
+          rank = 'セキュリティリーダー';
+          finalRankEl.classList.add('cyan');
+          addLog('EVALUATION RANK: [SECURITY LEADER].', 'info');
+        } else if (currentExp >= 500) {
+          rank = 'セキュリティガード';
+          finalRankEl.classList.add('yellow');
+          addLog('EVALUATION RANK: [SECURITY GUARD].', 'info');
+        } else {
+          rank = 'AIビギナー';
+          finalRankEl.classList.add('pink');
+          addLog('EVALUATION RANK: [AI BEGINNER].', 'error');
+        }
+      } else { // hard
+        if (currentExp >= 1200) {
+          rank = 'レジェンド・ホワイトハッカー';
+          finalRankEl.classList.add('gold');
+          addLog('EVALUATION RANK: [LEGEND WHITE HACKER]. LEGENDARY SECURITY EXPERTISE.', 'success');
+        } else if (currentExp >= 1000) {
+          rank = 'ホワイトハッカー';
+          finalRankEl.classList.add('green');
+          addLog('EVALUATION RANK: [WHITE HACKER]. HIGHLY SECURED PROCESSES.', 'success');
+        } else if (currentExp >= 800) {
+          rank = 'セキュリティリーダー';
+          finalRankEl.classList.add('cyan');
+          addLog('EVALUATION RANK: [SECURITY LEADER]. STRONG SECURITY FOUNDATION.', 'info');
+        } else if (currentExp >= 500) {
+          rank = 'セキュリティガード';
+          finalRankEl.classList.add('yellow');
+          addLog('EVALUATION RANK: [SECURITY GUARD]. MINOR BULWARK ESTABLISHED.', 'info');
+        } else {
+          rank = 'AIビギナー';
+          finalRankEl.classList.add('pink');
+          addLog('EVALUATION RANK: [AI BEGINNER]. CRITICAL SYSTEM WARNING.', 'error');
+        }
       }
       finalRankEl.textContent = rank;
 
