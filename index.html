@@ -1355,8 +1355,9 @@
         logs.forEach(log => {
           const item = document.createElement('div');
           item.style.display = 'flex';
-          item.style.justify = 'space-between';
+          item.style.justifyContent = 'space-between';
           item.style.alignItems = 'center';
+          item.style.gap = '15px';
           item.style.background = 'rgba(20,20,30,0.6)';
           item.style.border = '1px solid rgba(0, 240, 255, 0.2)';
           item.style.padding = '10px 15px';
@@ -1381,7 +1382,7 @@
               <span style="color: var(--neon-green); font-weight: 700; margin-left: 15px;">${log.exp} / 1300 EXP</span>
             </div>
             <div>
-              <span style="color: ${rankColor}; font-size: 0.75rem; font-weight: 700;">${log.rank}</span>
+              <span style="color: ${rankColor}; font-size: 0.75rem; font-weight: 700; margin-left: 15px;">${log.rank}</span>
             </div>
           `;
           listEl.appendChild(item);
